@@ -18,8 +18,6 @@ public class YandexMapController: NSObject, FlutterPlatformView {
   private var polygons: [YMKPolygonMapObject] = []
   public let mapView: YMKMapView
 
-  let wrapperView: UIView
-
   public required init(id: Int64, frame: CGRect, registrar: FlutterPluginRegistrar) {
     self.pluginRegistrar = registrar
     self.mapView = YMKMapView(frame: frame)
@@ -32,8 +30,6 @@ public class YandexMapController: NSObject, FlutterPlatformView {
     self.mapSizeChangedListener = MapSizeChangedListener(channel: methodChannel)
     self.userLocationLayer = YMKMapKit.sharedInstance().createUserLocationLayer(with: mapView.mapWindow)
 
-    self.wrapperView = UIView(frame: frame)
-
     super.init()
 
     weak var weakSelf = self
@@ -41,16 +37,10 @@ public class YandexMapController: NSObject, FlutterPlatformView {
 
     self.mapView.mapWindow.map.addInputListener(with: mapTapListener)
     self.mapView.mapWindow.addSizeChangedListener(with: mapSizeChangedListener)
-
-    self.wrapperView.addSubview(self.mapView)
   }
 
   public func view() -> UIView {
-    return self.wrapperView
-  }
-
-  deinit {
-    self.mapView.removeFromSuperview()
+    return self.mapView
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
