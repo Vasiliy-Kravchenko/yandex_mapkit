@@ -32,7 +32,7 @@ public class YandexMapController: NSObject, FlutterPlatformView {
     self.mapSizeChangedListener = MapSizeChangedListener(channel: methodChannel)
     self.userLocationLayer = YMKMapKit.sharedInstance().createUserLocationLayer(with: mapView.mapWindow)
 
-    wrapperView = UIView(frame: frame)
+    self.wrapperView = UIView(frame: frame)
 
     super.init()
 
