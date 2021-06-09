@@ -42,7 +42,7 @@ public class YandexMapController: NSObject, FlutterPlatformView {
     self.mapView.mapWindow.map.addInputListener(with: mapTapListener)
     self.mapView.mapWindow.addSizeChangedListener(with: mapSizeChangedListener)
 
-    self.wrapperView.addSubView(self.mapView)
+    self.wrapperView.addSubview(self.mapView)
   }
 
   public func view() -> UIView {
@@ -50,7 +50,7 @@ public class YandexMapController: NSObject, FlutterPlatformView {
   }
 
   deinit {
-    interactiveMap.view.removeFromSuperview()
+    self.mapView.removeFromSuperview()
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
